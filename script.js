@@ -1,5 +1,5 @@
 let el_down = "Maks1mio";
-
+ 
 function gfg_Run() {
     var inputF = document.getElementById("id1").value;
     el_down = inputF;
