@@ -14,8 +14,8 @@ async function updateUser() {
         //   .then(url => url.json()); // субъективщина
 
         console.log(potUrl);
-        console.log(response.login);
         console.log(response.avatar_url);
+        console.log(response.login);
 
         // Avatar Image
         userAvatar.src = response.avatar_url;
