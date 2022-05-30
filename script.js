@@ -1,39 +1,37 @@
-let el_down = "Maks1mio";
- 
-function gfg_Run() {
-    var inputF = document.getElementById("id1").value;
-    el_down = inputF;
-    console.log(el_down);
-}
+const searchInput = document.getElementById("searchInput");
+const searchButton = document.getElementById("searchButton");
+const userAvatar = document.getElementById("imgAvatar");
+const userName = document.getElementById("nameUser");
 
-function updateUser() {
-    (async () => {
+// вместо вызова анонимной асинхронной функции, нужно было эту функцию сделать асинхронной
+async function updateUser() {
+        let potUrl = "https://api.github.com/users/" + searchInput.value;
 
-        let potUrl = "https://api.github.com/users/" + el_down;
-
-        let url = await fetch(potUrl)
+        let url = await fetch(potUrl);
         let response = await url.json();
+        // можно было сделать чисто
+        // let response = await fetch(potUrl)
+        //   .then(url => url.json()); // субъективщина
 
-        console.log(potUrl)
-        console.log(response.login)
-        console.log(response.avatar_url)
+        console.log(potUrl);
+        console.log(response.login);
+        console.log(response.avatar_url);
 
         // Avatar Image
-        let avatar = await fetch(response.avatar_url);
-
-        let blob = await avatar.blob();
-        let imgAvatar = document.getElementById('imgAvatar');
-
-        imgAvatar.src = URL.createObjectURL(blob);
+        userAvatar.src = response.avatar_url;
 
         // User Name GitHub
-        let name = await response.login;
+        userName.innerText = response.login;
 
-        let textConvert = await name;
-        console.log(textConvert)
-        let nameSet = document.getElementById('nameUser').innerText = response.login;
-        nameSet.title = textConvert;
-    })()
+        // этих строчек я вообще не понял
+        // let name = await response.login;
+
+        // let textConvert = await name;
+        // console.log(textConvert)
+        // let nameSet = document.getElementById('nameUser').innerText = response.login;
+        // nameSet.title = textConvert;
 }
 
-console.log(inputF)
+// Два разных способа добавить обработчик событий, addEventListener предпочтительнее
+// searchButton.onclick = updateUser;
+searchButton.addEventListener("click", updateUser);

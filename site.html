@@ -6,19 +6,21 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
-    <script src="script.js"></script>
-    <title>Document</title>
+    <title>Document (fix by DMax)</title>
 </head>
 
 <body style="background: #1c1c1c;">
-    <div style="margin-bottom: 10px;" class="boxContent">
-        <label class="labelText" for="site-search">Search the site:</label>
-        <input class="inputStyle" type="search" id="id1" onkeyup="gfg_Run()">
-        <button class="button" onclick="updateUser()">Update</button></div>
+    <form> <!-- Для обособления кидаем элементы в форму -->
+        <label class="labelText" for="searchInput">Search the site:</label> <!-- В  for устанавливается id инпута, тогда по нажатии на label будет выделено поле для ввода текста -->
+        <input class="inputStyle" type="search" id="searchInput" /> <!-- Даём понятное имя -->
+        <button class="button" id="searchButton">Update</button> <!-- Обработчики событий добавляем в коде -->
+    </form>
     <div class="boxContent">
         <img class="userAvatar" id="imgAvatar">
         <span class="nameText" id="nameUser"></div>
     </div>
+
+    <script src="script.js"></script>
 </body>
 
 </html>
