@@ -1,37 +1,38 @@
 const searchInput = document.getElementById("searchInput");
 const searchButton = document.getElementById("searchButton");
-const userAvatar = document.getElementById("imgAvatar");
-const userName = document.getElementById("nameUser");
 
-// вместо вызова анонимной асинхронной функции, нужно было эту функцию сделать асинхронной
-async function updateUser() {
+let my_div = newDiv = null;
+
+async function addElement() {
         let potUrl = "https://api.github.com/users/" + searchInput.value;
 
         let url = await fetch(potUrl);
         let response = await url.json();
-        // можно было сделать чисто
-        // let response = await fetch(potUrl)
-        //   .then(url => url.json()); // субъективщина
 
-        console.log(potUrl);
-        console.log(response.avatar_url);
-        console.log(response.login);
+        let newDiv = document.createElement("div");
+        newDiv.className = "boxContent";
+        newDiv.id = "boxContentID";
 
-        // Avatar Image
-        userAvatar.src = response.avatar_url;
+        let newImg = document.createElement("img");
+        newImg.className = "userAvatar";
+        newImg.src = response.avatar_url;
 
-        // User Name GitHub
-        userName.innerText = response.login;
+        let newSpan = document.createElement("span");
+        newSpan.className = "nameText";
+        newSpan.innerText = response.login;
 
-        // этих строчек я вообще не понял
-        // let name = await response.login;
+        document.body.insertBefore(newDiv, my_div);
+        newDiv.appendChild(newImg);
+        newDiv.appendChild(newSpan);
 
-        // let textConvert = await name;
-        // console.log(textConvert)
-        // let nameSet = document.getElementById('nameUser').innerText = response.login;
-        // nameSet.title = textConvert;
+        const users = {
+                avatar: response.avatar_url,
+                user: response.login
+        }
+        
+        
+
+
 }
 
-// Два разных способа добавить обработчик событий, addEventListener предпочтительнее
-// searchButton.onclick = updateUser;
-searchButton.addEventListener("click", updateUser);
+searchButton.addEventListener("click", addElement);
